@@ -33,12 +33,15 @@ Portfolio repositories often fail for practical reasons: the README is vague, se
 ├── .github/
 │   └── workflows/
 │       └── validate.yml
+├── docs/
+│   └── validation.md
 ├── README.md
 ├── portfolio-polisher/
 │   ├── SKILL.md
 │   └── agents/
 │       └── openai.yaml
 └── scripts/
+    ├── install.sh
     └── validate_skills.py
 ```
 
@@ -52,21 +55,27 @@ Portfolio repositories often fail for practical reasons: the README is vague, se
 
 ### Install
 
-Clone this repository and copy the skill folder into your Codex skills directory:
+Clone this repository and run the installer:
 
 ```bash
 git clone https://github.com/marcellokim/codex-skills.git
+cd codex-skills
+scripts/install.sh
+```
+
+Manual install is also supported:
+
+```bash
 mkdir -p ~/.codex/skills
-cp -R codex-skills/portfolio-polisher ~/.codex/skills/
+cp -R portfolio-polisher ~/.codex/skills/
 ```
 
 Then start a new Codex session, or reload skills if your client supports skill reloads.
 
-For older Codex/agent setups that still scan `~/.agents/skills`, copy the same folder there instead:
+For older Codex/agent setups that still scan `~/.agents/skills`, install to that target instead:
 
 ```bash
-mkdir -p ~/.agents/skills
-cp -R codex-skills/portfolio-polisher ~/.agents/skills/
+scripts/install.sh --target ~/.agents/skills
 ```
 
 ### Environment Variables
@@ -121,7 +130,10 @@ No package installation is required. Validate the skill files with:
 
 ```bash
 python3 scripts/validate_skills.py
+bash -n scripts/install.sh
 ```
+
+Behavioral validation notes are recorded in [docs/validation.md](docs/validation.md).
 
 The validator checks:
 
@@ -176,6 +188,7 @@ Keep skills focused on one reusable workflow. Prefer instruction-only skills fir
 ## Roadmap
 
 - Add more reusable Codex skills only after testing them on real prompts.
+- Capture independent pressure-test transcripts in `docs/validation.md` when available.
 - Add optional reference files when `portfolio-polisher` needs stack-specific deployment guidance.
 - Expand `scripts/validate_skills.py` only for checks that catch real authoring mistakes.
 
