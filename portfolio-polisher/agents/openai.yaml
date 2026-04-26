@@ -1,0 +1,7 @@
+interface:
+  display_name: "Portfolio Polisher"
+  short_description: "Polish portfolio repos for reviewers."
+  default_prompt: "Use $portfolio-polisher to make this repository portfolio-ready with accurate README, setup, security hygiene, and verified commands."
+
+policy:
+  allow_implicit_invocation: false
